@@ -1,0 +1,10 @@
+extends layout
+
+block content
+  h1 Commander le taxi #{taxi_id}
+  a(href='/') Retour vers la page d'accueil
+
+  if error
+    div.error
+      p L'API le.taxi a répondu l'erreur suivante :
+      code #{JSON.stringify(error)}

@@ -1,0 +1,58 @@
+extends layout
+
+block content
+  h1 Détails du hail #{hailId}
+  a(href='/') Retour vers la page d'accueil
+
+  if error
+    div.error
+      p L'API le.taxi a répondu l'erreur suivante :
+      code #{JSON.stringify(error)}
+
+  if hail
+    table
+      tr
+        th Id
+        td= hail.id
+
+      tr
+        th status
+        td= hail.status
+
+      tr
+        th Date du dernier changement de statut
+        td= hail.last_status_change
+
+      tr
+        th Longitude du taxi
+        td= hail.taxi.position.lon
+
+      tr
+        th Latitude du taxi
+        td= hail.taxi.position.lat
+
+      tr
+        th Numéro de téléphone du taxi
+        td= hail.taxi_phone_number
+
+    if hail.status === 'accepted_by_taxi'
+      form(action=`/hail_info?id=${hail.id}`, method='post')
+        div.formfield
+          label(for='status') Mettre le statut de la course à la valeur suivante :
+          select(id='status' name='status')
+            option(value='accepted_by_customer') accepted_by_customer
+            option(value='declined_by_customer') declined_by_customer
+            option(value='incident_customer') incident_customer
+
+        div.formfield
+          input(type='submit', value='Mettre le statut à jour')
+
+    else if ['received_by_operator', 'received_by_taxi', 'accepted_by_customer', 'customer_on_board'].indexOf(hail.status) > -1
+      form(action=`/hail_info?id=${hail.id}`, method='post')
+        div.formfield
+          label(for='status') Mettre le statut de la course à la valeur suivante :
+          select(id='status' name='status')
+            option(value='incident_customer') incident_customer
+
+        div.formfield
+          input(type='submit', value='Mettre le statut à jour')

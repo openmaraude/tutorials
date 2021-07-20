@@ -1,0 +1,36 @@
+extends layout
+
+block content
+  h1 Taxis autour du client #{client.customer_id} (lon=#{client.lon} lat=#{client.lat})
+  a(href='/') Retour vers la page d'accueil
+
+  if error
+    div.error
+      p L'API le.taxi a répondu l'erreur suivante :
+      code #{JSON.stringify(error)}
+
+  if taxis
+    table
+      tr
+        th Taxi id
+        th Opérateur
+        th Plaque d'immat.
+        th Longitude
+        th Latitude
+        th Distance
+        th Action
+
+      for taxi in taxis
+        tr
+          td #{taxi.id}
+          td #{taxi.operator}
+          td #{taxi.vehicle.licence_plate}
+          td #{taxi.position.lon.toFixed(5)}
+          td #{taxi.position.lat.toFixed(5)}
+          td #{taxi.crowfly_distance} mètres
+          td
+            form(action='/order', method="post")
+              input(name='taxi_id', type='hidden', value="#{taxi.id}")
+              input(name='operator', type='hidden', value="#{taxi.operator}")
+              input(name='client', type='hidden', value="#{JSON.stringify(client)}")
+              input(type="submit", value="Commander")

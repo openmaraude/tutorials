@@ -1,0 +1,28 @@
+extends layout
+
+block content
+  h1 Renseignez les informations du client
+
+  form(action='/search_taxis')
+    div.formfield
+      label(for='customer_id') Customer id
+      input(id='customer_id', name='customer_id', type='text', placeholder='Id client', value="#{parseInt(Math.random() * 1000000)}" required)
+
+    div.formfield
+      label(for='phone_number') Numéro de téléphone du client
+      input(id='phone_number', name='phone_number', type='text', placeholder='Numéro de téléphone' required)
+
+    div.formfield
+      label(for='address') Adresse du client
+      input(id='address', name='address', type='text', placeholder='Adresse', required)
+
+    div.formfield
+      label(for='lon') Longitude du client
+      input(id='lon', name='lon', type='number', placeholder='Longitude', step=".0000001" required)
+
+    div.formfield
+      label(for='lat') Latitude du client
+      input(id='lat', name='lat', type='number', placeholder='Latitude', step=".0000001" required)
+
+    div.formfield
+      input(type='submit', value='OK')
