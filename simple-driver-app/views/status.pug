@@ -1,0 +1,64 @@
+extends layout
+
+block content
+  h1= `${taxi.driver.first_name} ${taxi.driver.last_name}`
+
+  form(action='/status?taxi_id=' + taxi.id, method='POST')
+    div.formfield
+      label Statut
+      input.inline(id='status_free', type='radio', name='status', value='free', checked=taxi.status == 'free')
+      label.inline(for='status_free') Free
+      input.inline(id='status_off', type='radio', name='status', value='off', checked=taxi.status != 'free')
+      label.inline(for='status_off') Off
+
+    div.formfield
+      label(for='lon') Longitude du véhicule
+      input(id='lon', name='lon', type='number', placeholder='Longitude', step=".0000001" value=taxi.position.lon, required)
+
+    div.formfield
+      label(for='lat') Latitude du véhicule
+      input(id='lat', name='lat', type='number', placeholder='Latitude', step=".0000001" value=taxi.position.lat, required)
+
+    div.formfield
+      input(type='submit', value='OK')
+
+  p
+    if hail
+      h2 Course en cours !
+        table
+          tr
+            th ID
+            td= hail.id
+          tr
+            th Statut
+            td= hail.status
+          tr
+            th Adresse
+            td= hail.customer_address
+          tr
+            td
+            td
+              form(action='/update_hail', method='POST')
+                input(type='hidden', name='taxi_id', value=taxi.id)
+                if hail.status == 'received_by_taxi'
+                  button(type='submit', name='action', value='accept') Accepter
+                  button(type='submit', name='action', value='decline') Refuser
+                else if hail.status == 'accepted_by_taxi'
+                  p Le client a 30 secondes pour confirmer sa demande de course...
+                  button(type='submit', name='action', value='declare_incident') Signaler un incident
+                else if hail.status == 'accepted_by_customer'
+                  button(type='submit', name='action', value='declare_on_board') Déclarer le client à bord
+                  button(type='submit', name='action', value='declare_incident') Signaler un incident
+                else if hail.status == 'customer_on_board'
+                  button(type='submit', name='action', value='finish') Terminer la course
+                  button(type='submit', name='action', value='declare_incident') Signaler un incident
+                else
+                  button(type='submit', name='action', value='reset') Reset for developement
+    else
+      em Pas de demande de course
+
+  h3 Taxi debug
+  code= JSON.stringify(taxi)
+  if hail
+    h3 Hail debug
+    code= JSON.stringify(hail)

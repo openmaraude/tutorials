@@ -1,0 +1,12 @@
+extends layout
+
+block content
+  h1 Connexion à l'application
+
+  form(action='/status')
+    div.formfield
+      label(for='taxi_id') Taxi ID
+      input(id='taxi_id', name='taxi_id', type='text', placeholder='ID taxi', required)
+
+    div.formfield
+      input(type='submit', value='OK')
