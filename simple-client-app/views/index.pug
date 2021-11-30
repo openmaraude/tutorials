@@ -6,7 +6,7 @@ block content
   form(action='/search_taxis')
     div.formfield
       label(for='customer_id') Customer id
-      input(id='customer_id', name='customer_id', type='text', placeholder='Id client', value="#{parseInt(Math.random() * 1000000)}" required)
+      input(id='customer_id', name='customer_id', type='text', placeholder='Id client', value=parseInt(Math.random() * 1000000) required)
 
     div.formfield
       label(for='phone_number') Numéro de téléphone du client

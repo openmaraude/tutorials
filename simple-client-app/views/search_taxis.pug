@@ -30,7 +30,7 @@ block content
           td #{taxi.crowfly_distance} mètres
           td
             form(action='/order', method="post")
-              input(name='taxi_id', type='hidden', value="#{taxi.id}")
-              input(name='operator', type='hidden', value="#{taxi.operator}")
-              input(name='client', type='hidden', value="#{JSON.stringify(client)}")
+              input(name='taxi_id', type='hidden', value=taxi.id)
+              input(name='operator', type='hidden', value=taxi.operator)
+              input(name='client', type='hidden', value=JSON.stringify(client))
               input(type="submit", value="Commander")
