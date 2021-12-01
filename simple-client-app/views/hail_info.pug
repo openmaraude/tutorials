@@ -7,7 +7,7 @@ block content
   if error
     div.error
       p L'API le.taxi a répondu l'erreur suivante :
-      code #{JSON.stringify(error)}
+      code= JSON.stringify(error)
 
   if hail
     table

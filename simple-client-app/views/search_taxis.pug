@@ -7,7 +7,7 @@ block content
   if error
     div.error
       p L'API le.taxi a répondu l'erreur suivante :
-      code #{JSON.stringify(error)}
+      code= JSON.stringify(error)
 
   if taxis
     table
@@ -22,11 +22,11 @@ block content
 
       for taxi in taxis
         tr
-          td #{taxi.id}
-          td #{taxi.operator}
-          td #{taxi.vehicle.licence_plate}
-          td #{taxi.position.lon.toFixed(5)}
-          td #{taxi.position.lat.toFixed(5)}
+          td= taxi.id
+          td= taxi.operator
+          td= taxi.vehicle.licence_plate
+          td= taxi.position.lon.toFixed(5)
+          td= taxi.position.lat.toFixed(5)
           td #{taxi.crowfly_distance} mètres
           td
             form(action='/order', method="post")
