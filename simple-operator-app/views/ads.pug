@@ -1,0 +1,24 @@
+extends layout
+
+block content
+  if message
+    blockquote.message= message
+
+  if error
+    blockquote.error
+      p L'API le.taxi a répondu l'erreur suivante :
+      code= JSON.stringify(error)
+
+  a(href='/') Retour vers la page d'accueil
+
+  h1 Créer une ADS
+
+  form(action='/ads', method='POST')
+    div.formfield
+      label Numéro d'ADS*
+      input(name='numero', value=body ? body.numero : '', required)
+    div.formfield
+      label Code INSEE de la commune*
+      input(name='insee', value=body ? body.insee : '', required)
+    div.formfield
+      button(type='submit') Valider

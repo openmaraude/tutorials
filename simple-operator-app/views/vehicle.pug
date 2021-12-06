@@ -1,0 +1,21 @@
+extends layout
+
+block content
+  if message
+    blockquote.message= message
+
+  if error
+    blockquote.error
+      p L'API le.taxi a répondu l'erreur suivante :
+      code= JSON.stringify(error)
+
+  a(href='/') Retour vers la page d'accueil
+
+  h1 Créer un véhicule
+
+  form(action='/vehicle', method='POST')
+    div.formfield
+      label Plaque d'immatriculation*
+      input(name='licence_plate', value=body ? body.licence_plate : '', required)
+    div.formfield
+      button(type='submit') Valider

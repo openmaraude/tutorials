@@ -1,0 +1,17 @@
+extends layout
+
+block content
+  h1 Application opérateur
+  ul
+    li
+      a(href='/driver') Créer un chauffeur
+    li
+      a(href='/vehicle') Créer un véhicule
+    li
+      a(href='/ads') Créer une ADS
+    li
+      a(href='/taxi') Créer un taxi
+
+  fieldset
+    legend RAPPEL
+    blockquote Un taxi est la combinaison d'un chauffeur, d'un véhicule et d'une ADS, vous aurez besoin des trois avant de créer un taxi fonctionnel.

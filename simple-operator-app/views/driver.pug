@@ -1,0 +1,33 @@
+extends layout
+
+block content
+  if message
+    blockquote.message= message
+
+  if error
+    blockquote.error
+      p L'API le.taxi a répondu l'erreur suivante :
+      code= JSON.stringify(error)
+
+  a(href='/') Retour vers la page d'accueil
+
+  h1 Créer un chauffeur
+
+  form(action='/driver', method='POST')
+    div.formfield
+      label Prénom*
+      input(name='first_name', value=body ? body.first_name : '', required)
+    div.formfield
+      label Nom*
+      input(name='last_name', value=body ? body.last_name: '', required)
+    div.formfield
+      label Licence professionnelle*
+      input(name='professional_licence', value=body ? body.professional_licence: '' required)
+    div.formfield
+      label Département*
+      input(name='departement', value=body ? body.departement : '', required)
+    div.formfield
+      label Date de naissance (YYYY-MM-DD)
+      input(name='birth_date', value=body ? body.birth_date: '')
+    div.formfield
+      button(type='submit') Valider
