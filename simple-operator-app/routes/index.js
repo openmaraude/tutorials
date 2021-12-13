@@ -1,6 +1,7 @@
-var express = require('express');
-var router = express.Router();
 var axios = require('axios');
+var express = require('express');
+
+var router = express.Router();
 
 const API_URL = 'https://dev.api.taxi'
 const headers = {
