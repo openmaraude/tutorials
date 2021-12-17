@@ -25,7 +25,6 @@ router.post('/driver', function (req, res) {
       data: [{
         ...req.body,
         departement: {
-          nom: "",
           numero: req.body.departement,
         },
         birth_date: req.body.birth_date || null,

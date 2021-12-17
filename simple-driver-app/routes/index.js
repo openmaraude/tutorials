@@ -13,7 +13,7 @@ const headers = {
 // Store a single hail globally in memory for the sake of this tutorial
 var hail = undefined;
 
-function update_hail_status(status, taxi_phone_number=null) {
+function update_hail_status(status, taxi_phone_number = null) {
   var data = {
     data: [{
       status: status
@@ -52,6 +52,7 @@ router.get('/status', function (req, res) {
         hail = data.data[0];
       });
       // Simulate the operator backend and pretend it was sent to the driver app
+      // Must happen under 10 seconds after the hail is `received_by_operator`
       if (hail.status == 'received_by_operator') {
         update_hail_status('received_by_taxi');
       }
@@ -103,12 +104,11 @@ router.post('/status', function (req, res) {
 router.post('/hail', function (req, res) {
   // The global hail object to simplify this tutorial
   hail = req.body.data[0];
-  console.log(`received hail! status=${hail.status} ${JSON.stringify(hail)}`)
   // return a valid JSON response, le.taxi API will check it
   res.json({});
 });
 
-router.post('/update_hail', function(req, res) {
+router.post('/update_hail', function (req, res) {
   var taxi_id = req.body.taxi_id;
   switch (req.body.action) {
     case 'accept':
