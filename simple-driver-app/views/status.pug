@@ -22,43 +22,37 @@ block content
     div.formfield
       input(type='submit', value='OK')
 
-  p
-    if hail
-      h2 Course en cours !
-        table
-          tr
-            th ID
-            td= hail.id
-          tr
-            th Statut
-            td= hail.status
-          tr
-            th Adresse
-            td= hail.customer_address
-          tr
-            td
-            td
-              form(action='/update_hail', method='POST')
-                input(type='hidden', name='taxi_id', value=taxi.id)
-                if hail.status == 'received_by_taxi'
-                  button(type='submit', name='action', value='accept') Accepter
-                  button(type='submit', name='action', value='decline') Refuser
-                else if hail.status == 'accepted_by_taxi'
-                  p Le client a 30 secondes pour confirmer sa demande de course...
-                  button(type='submit', name='action', value='declare_incident') Signaler un incident
-                else if hail.status == 'accepted_by_customer'
-                  button(type='submit', name='action', value='declare_on_board') Déclarer le client à bord
-                  button(type='submit', name='action', value='declare_incident') Signaler un incident
-                else if hail.status == 'customer_on_board'
-                  button(type='submit', name='action', value='finish') Terminer la course
-                  button(type='submit', name='action', value='declare_incident') Signaler un incident
-                else
-                  button(type='submit', name='action', value='reset') Reset for developement
-    else
-      em Pas de demande de course
-
-  h3 Taxi debug
-  code= JSON.stringify(taxi)
   if hail
-    h3 Hail debug
-    code= JSON.stringify(hail)
+    h2 Course en cours !
+      table
+        tr
+          th ID
+          td= hail.id
+        tr
+          th Statut
+          td= hail.status
+        tr
+          th Adresse
+          td= hail.customer_address
+        tr
+          td
+          td
+            form(action='/update_hail', method='POST')
+              input(type='hidden', name='taxi_id', value=taxi.id)
+              if hail.status == 'received_by_taxi'
+                p Le client attend 30 secondes votre acceptation de sa demande de course
+                button(type='submit', name='action', value='accept') Accepter
+                button(type='submit', name='action', value='decline') Refuser
+              else if hail.status == 'accepted_by_taxi'
+                p Le client a 30 secondes pour confirmer sa demande de course...
+                button(type='submit', name='action', value='declare_incident') Signaler un incident
+              else if hail.status == 'accepted_by_customer'
+                button(type='submit', name='action', value='declare_on_board') Déclarer le client à bord
+                button(type='submit', name='action', value='declare_incident') Signaler un incident
+              else if hail.status == 'customer_on_board'
+                button(type='submit', name='action', value='finish') Terminer la course
+                button(type='submit', name='action', value='declare_incident') Signaler un incident
+              else
+                button(type='submit', name='action', value='reset') Reset for developement
+  else
+    em Pas de demande de course
