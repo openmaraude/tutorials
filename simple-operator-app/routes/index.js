@@ -31,7 +31,7 @@ router.post('/driver', function (req, res) {
       }]
     }
   }).then(() => {
-    res.render('driver', { message: "Chauffeur créé avec succès" });
+    res.render('driver', { message: "Chauffeur déclaré avec succès" });
   }).catch(({ response }) => {
     res.render('driver', { error: response.data, body: req.body });
   });
@@ -51,7 +51,7 @@ router.post('/vehicle', function (req, res) {
       }]
     }
   }).then(() => {
-    res.render('vehicle', { message: "Véhicule créé avec succès" });
+    res.render('vehicle', { message: "Véhicule déclaré avec succès" });
   }).catch(({ response }) => {
     res.render('vehicle', { error: response.data, body: req.body });
   });
@@ -71,7 +71,7 @@ router.post('/ads', function (req, res) {
       }]
     }
   }).then(() => {
-    res.render('ads', { message: "ADS créée avec succès" });
+    res.render('ads', { message: "ADS déclarée avec succès" });
   }).catch(({ response }) => {
     res.render('ads', { error: response.data, body: req.body });
   });
@@ -101,7 +101,7 @@ router.post('/taxi', function (req, res) {
       }]
     }
   }).then(() => {
-    res.render('taxi', { message: "Taxi créé avec succès" });
+    res.render('taxi', { message: "Taxi déclaré avec succès" });
   }).catch(({ response }) => {
     res.render('taxi', { error: response.data, body: req.body });
   });
